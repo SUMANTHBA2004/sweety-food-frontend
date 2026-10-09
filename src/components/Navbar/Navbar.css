@@ -1,0 +1,598 @@
+/* =========================================
+   SWEETLY NAVBAR
+========================================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  width: 100%;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+
+  animation: navbarSlideDown 0.6s ease;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.navbar-container {
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  padding: 14px 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+/* =========================================
+   LOGO
+========================================= */
+
+.brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  text-decoration: none;
+
+  min-width: 190px;
+}
+
+.brand-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+
+  color: white;
+
+  font-size: 25px;
+
+  box-shadow: 0 8px 20px rgba(221, 36, 118, 0.25);
+
+  transition: all 0.3s ease;
+}
+
+.brand:hover .brand-icon {
+  transform: rotate(-8deg) scale(1.08);
+
+  box-shadow: 0 12px 28px rgba(221, 36, 118, 0.35);
+}
+
+.brand-text {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 24px;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-subtitle {
+  margin-top: 5px;
+
+  font-size: 8px;
+
+  letter-spacing: 2px;
+
+  font-weight: 700;
+
+  color: #777;
+}
+
+/* =========================================
+   DESKTOP NAVIGATION
+========================================= */
+
+.nav-menu {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.nav-menu a {
+  position: relative;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
+  text-decoration: none;
+
+  color: #444;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: #dd2476;
+
+  background: rgba(221, 36, 118, 0.07);
+
+  transform: translateY(-2px);
+}
+
+.nav-menu a.active {
+  color: #dd2476;
+
+  background: rgba(221, 36, 118, 0.09);
+}
+
+.nav-menu a.active::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 4px;
+
+  width: 5px;
+
+  height: 5px;
+
+  border-radius: 50%;
+
+  background: #dd2476;
+
+  transform: translateX(-50%);
+}
+
+/* =========================================
+   RIGHT ACTIONS
+========================================= */
+
+.navbar-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.login-link {
+  padding: 10px 20px;
+
+  border: 1px solid #eee;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  color: #333;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+}
+
+.login-link:hover {
+  color: white;
+
+  border-color: #dd2476;
+
+  background: linear-gradient(135deg, #ff512f, #dd2476);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 18px rgba(221, 36, 118, 0.25);
+}
+
+/* =========================================
+   CART BUTTON
+========================================= */
+
+.cart-button {
+  position: relative;
+
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: #fff3f6;
+
+  text-decoration: none;
+
+  font-size: 20px;
+
+  transition: all 0.3s ease;
+}
+
+.cart-button:hover {
+  transform: translateY(-3px) scale(1.05);
+
+  background: #ffe1e9;
+
+  box-shadow: 0 8px 20px rgba(221, 36, 118, 0.18);
+}
+
+/* =========================================
+   CART BADGE
+========================================= */
+
+.cart-badge {
+  position: absolute;
+
+  top: -5px;
+
+  right: -5px;
+
+  min-width: 20px;
+
+  height: 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 5px;
+
+  border-radius: 20px;
+
+  background: #dd2476;
+
+  color: white;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  border: 2px solid white;
+
+  animation: badgePop 0.3s ease;
+}
+
+/* =========================================
+   MOBILE MENU BUTTON
+========================================= */
+
+.menu-toggle {
+  display: none;
+
+  width: 45px;
+  height: 45px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #fff3f6;
+
+  cursor: pointer;
+
+  padding: 10px;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+.menu-toggle span {
+  display: block;
+
+  width: 22px;
+  height: 2px;
+
+  border-radius: 5px;
+
+  background: #dd2476;
+
+  transition: all 0.3s ease;
+}
+
+/* Hamburger animation */
+
+.menu-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+.mobile-menu {
+  display: none;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes navbarSlideDown {
+  from {
+    opacity: 0;
+
+    transform: translateY(-25px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(0);
+  }
+
+  70% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .nav-menu {
+    gap: 0;
+  }
+
+  .nav-menu a {
+    padding: 9px 11px;
+
+    font-size: 14px;
+  }
+
+  .brand {
+    min-width: auto;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+  .navbar-container {
+    padding: 12px 18px;
+  }
+
+  .brand-icon {
+    width: 42px;
+    height: 42px;
+
+    font-size: 21px;
+
+    border-radius: 12px;
+  }
+
+  .brand-name {
+    font-size: 21px;
+  }
+
+  .brand-subtitle {
+    font-size: 7px;
+
+    letter-spacing: 1.5px;
+  }
+
+  /* Hide desktop navigation */
+
+  .nav-menu,
+  .navbar-actions {
+    display: none;
+  }
+
+  /* Show hamburger */
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Mobile dropdown */
+
+  .mobile-menu {
+    display: flex;
+
+    position: absolute;
+
+    top: 100%;
+
+    left: 0;
+
+    width: 100%;
+
+    padding: 15px;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    background: rgba(255, 255, 255, 0.98);
+
+    backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+
+    transform: translateY(-20px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: all 0.35s ease;
+  }
+
+  .mobile-menu-open {
+    transform: translateY(0);
+
+    opacity: 1;
+
+    visibility: visible;
+  }
+
+  .mobile-menu a {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    position: relative;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    color: #333;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+
+    transform: translateX(-10px);
+
+    opacity: 0;
+  }
+
+  .mobile-menu-open a {
+    transform: translateX(0);
+
+    opacity: 1;
+  }
+
+  .mobile-menu-open a:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+
+  .mobile-menu-open a:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+
+  .mobile-menu-open a:nth-child(3) {
+    transition-delay: 0.15s;
+  }
+
+  .mobile-menu-open a:nth-child(4) {
+    transition-delay: 0.2s;
+  }
+
+  .mobile-menu-open a:nth-child(5) {
+    transition-delay: 0.25s;
+  }
+
+  .mobile-menu a:hover {
+    background: #fff0f4;
+
+    color: #dd2476;
+
+    transform: translateX(5px);
+  }
+
+  .mobile-menu a.mobile-active {
+    background: linear-gradient(135deg, #fff0f4, #ffe7ef);
+
+    color: #dd2476;
+  }
+
+  .mobile-login {
+    margin-top: 5px;
+
+    color: white !important;
+
+    background: linear-gradient(135deg, #ff512f, #dd2476) !important;
+
+    justify-content: center;
+
+    box-shadow: 0 8px 20px rgba(221, 36, 118, 0.2);
+  }
+
+  .mobile-cart-count {
+    margin-left: auto;
+
+    min-width: 22px;
+
+    height: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dd2476;
+
+    color: white;
+
+    font-size: 11px;
+  }
+}
