@@ -1,26 +1,30 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./OrderSuccess.css";
 
 function OrderSuccess() {
   const location = useLocation();
-  const navigate = useNavigate();
 
-  /*
-    First try React Router state.
-    If page is refreshed, use localStorage.
-  */
-  const order =
-    location.state?.order ||
-    JSON.parse(localStorage.getItem("latestOrder") || "null");
+  // Retrieve the saved order from localStorage.
+  let savedOrder = null;
 
+  try {
+    savedOrder = JSON.parse(localStorage.getItem("latestOrder") || "null");
+  } catch (error) {
+    console.error("Unable to read saved order:", error);
+  }
+
+  // Prefer the order passed through React Router state.
+  const order = location.state?.order || savedOrder;
+
+  // Show a message if no order is available.
   if (!order) {
     return (
-      <div className="success-page">
+      <main className="success-page">
         <div className="success-card">
           <div className="success-animation">⚠️</div>
 
-          <h1>No recent order found</h1>
+          <h1>No Recent Order Found</h1>
 
           <p>Please place an order before opening this page.</p>
 
@@ -28,13 +32,15 @@ function OrderSuccess() {
             Go to Menu
           </Link>
         </div>
-      </div>
+      </main>
     );
   }
 
-  const orderId = order.orderId || order.id || "ORD" + Date.now();
+  // Order information.
+  const orderId = order.orderId || order.id || "Pending";
 
-  const customerName = order.customer?.name || order.customerName || "Customer";
+  const customerName =
+    order.customer?.name || order.customerName || order.name || "Customer";
 
   const phone =
     order.customer?.phone || order.customerPhone || order.phone || "";
@@ -44,6 +50,10 @@ function OrderSuccess() {
   const paymentMethod =
     order.paymentMethod || order.customer?.paymentMethod || "COD";
 
+  const formattedTotal = Number.isFinite(total) ? total.toFixed(2) : "0.00";
+
+  const isCashOnDelivery = String(paymentMethod).toUpperCase() === "COD";
+
   return (
     <main className="success-page">
       <div className="success-card">
@@ -51,53 +61,43 @@ function OrderSuccess() {
 
         <span className="success-label">ORDER CONFIRMED</span>
 
-        <h1>Your order is on its way! 🎉</h1>
+        <h1>Your Order Is Confirmed! 🎉</h1>
 
         <p>
-          Thank you, <strong>{customerName}</strong>. Your delicious food is
+          Thank you, <strong>{customerName}</strong>! Your delicious food is
           being prepared.
         </p>
 
         <div className="order-number">
           <span>ORDER ID</span>
-
           <strong>{orderId}</strong>
         </div>
 
         <div className="success-details">
           <div>
             <span>Total Amount</span>
-
-            <strong>₹{total}</strong>
+            <strong>₹{formattedTotal}</strong>
           </div>
 
           <div>
-            <span>Payment</span>
-
+            <span>Payment Method</span>
             <strong>
-              {paymentMethod === "COD" ? "Cash on Delivery" : "Online Payment"}
+              {isCashOnDelivery ? "Cash on Delivery" : "Online Payment"}
             </strong>
           </div>
 
           <div>
-            <span>Mobile</span>
-
+            <span>Mobile Number</span>
             <strong>{phone || "Not available"}</strong>
           </div>
         </div>
 
         <div className="confirmation-message">
-          📱 Your order confirmation has been saved successfully.
+          📱 Your order details are available on this page.
         </div>
 
         <div className="success-buttons">
-          <Link
-            to="/track-order"
-            className="track-button"
-            state={{
-              order,
-            }}
-          >
+          <Link to="/track-order" className="track-button" state={{ order }}>
             Track Order →
           </Link>
 
